@@ -8,20 +8,20 @@ export const registerCtrl = async (
     req: express.Request,
     res: express.Response
 ) => {
-    const { name, email, password } = req.body
-    let hashedPass = await bcrypt.hashSync(password, 10)
-
-    const checkUser = await existingUser(email)
-
-    if (checkUser) {
-        res.status(403).json({
-            error: true,
-            message: "Email exist !"
-        })
-        return
-    }
-
     try {
+        const { name, email, password } = req.body
+        let hashedPass = await bcrypt.hashSync(password, 10)
+    
+        const checkUser = await existingUser(email)
+    
+        if (checkUser) {
+            res.status(403).json({
+                error: true,
+                message: "Email exist !"
+            })
+            return
+        }
+
         const userData = {
             name: name,
             email: email,
@@ -50,9 +50,9 @@ export const loginCtrl = async (
     req: express.Request,
     res: express.Response
 ) => {
-    const { email, password } = req.body
-
     try {
+        const { email, password } = req.body
+
         const checkUser = await existingUser(email)
 
         if (!checkUser) {
@@ -101,10 +101,10 @@ export const getUserByIdCtrl = async (
     req: express.Request,
     res: express.Response
 ) => {
-    const { id } = req.params
-
     try {
-        const checkUser = await userById(id)
+        const userId = req.user?.id;
+
+        const checkUser = await userById(userId as string)
 
         if (!checkUser) {
             res.status(404).json({
@@ -133,21 +133,21 @@ export const updateUserCtrl = async (
     req: express.Request,
     res: express.Response
 ) => {
-    const { id } = req.params
-    const { name, email } = req.body
-
-    const checkUser = await userById(id)
-
-    if (id != checkUser?.id) {
-        res.status(403).json({
-            error: true,
-            message: "Can't update, wrong ID !"
-        })
-        return;
-    }
-
     try {
-        const updatedData = await updateUser(id, name, email)
+        const { name, email } = req.body
+        const userId = req.user?.id;
+    
+        const checkUser = await userById(userId as string)
+    
+        if (userId != checkUser?.id) {
+            res.status(403).json({
+                error: true,
+                message: "Can't update, wrong ID !"
+            })
+            return;
+        }
+
+        const updatedData = await updateUser(userId as string, name, email)
 
         res.status(200).json({
             error: false,

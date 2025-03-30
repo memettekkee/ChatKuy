@@ -9,7 +9,7 @@ router.post('/register', upload.none(), registerCtrl)
 router.post('/login', upload.none(), loginCtrl)
 
 // PRIVATE ROUTE
-router.get('/profile/:id', verifyToken, getUserByIdCtrl)
-router.put('/profile/:id', upload.none(), verifyToken, updateUserCtrl)
+router.get('/profile/detail', verifyToken, getUserByIdCtrl)
+router.put('/profile/update', upload.none(), verifyToken, updateUserCtrl)
 
 export default router
