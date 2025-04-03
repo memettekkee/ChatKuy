@@ -11,7 +11,8 @@ export default {
         'primary': '#00A651',     
         'secondary': '#E6FFE0',   
         'hover': '#009147',       
-        'accent': '#B8F5C8'       
+        'accent': '#B8F5C8',
+        'accent-2': '#F0FFF0'       
       }
   	}
   },

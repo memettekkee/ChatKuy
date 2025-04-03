@@ -27,10 +27,10 @@
           >
             How It Works
           </a>
-          <button class="bg-white border-2 border-primary text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
+          <button @click="$router.push('/login')"  class="bg-white border-2 border-primary text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
             Log In
           </button>
-          <button class="bg-primary text-white px-6 py-2 rounded-full hover:bg-hover transition-colors">
+          <button @click="$router.push('/register')"  class="bg-primary text-white px-6 py-2 rounded-full hover:bg-hover transition-colors">
             Sign Up Free
           </button>
         </nav>
@@ -60,10 +60,10 @@
               >
                 How It Works
               </a>
-              <button class="bg-white border-2 border-primary text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
+              <button @click="$router.push('/login')" class="bg-white border-2 border-primary text-primary px-4 py-2 rounded-full hover:bg-primary hover:text-white transition-colors">
                 Log In
               </button>
-              <button class="bg-primary text-white px-6 py-2 rounded-full hover:bg-[#0AB391] transition-colors">
+              <button @click="$router.push('/register')" class="bg-primary text-white px-6 py-2 rounded-full hover:bg-[#0AB391] transition-colors">
                 Sign Up Free
               </button>
             </nav>

@@ -1,6 +1,16 @@
 import { createApp } from 'vue'
 import './style.css'
-import App from './page/Home.vue'
+import App from './App.vue'
 import router from './routes/route'
+import PrimeVue from 'primevue/config'
+import AnimateOnScroll from 'primevue/animateonscroll'
+// import 'animate.css/animate.min.css'
 
-createApp(App).use(router).mount('#app')
+const app = createApp(App)
+app.use(PrimeVue)
+app.use(router)
+app.directive('animateonscroll', AnimateOnScroll)
+app.mount('#app')
+
+
+// createApp(App).use(router).mount('#app')
