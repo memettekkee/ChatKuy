@@ -19,7 +19,7 @@ import { features, communities, steps } from '../utils/data'
           ChatKuy brings friends together through playful, location-based messaging. Share moments, track adventures, and stay connected with the people who matter most.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <button class="bg-primary text-white px-8 py-3 rounded-full hover:bg-hover transition-colors flex items-center justify-center">
+          <button @click="$router.push('/chat')" class="bg-primary text-white px-8 py-3 rounded-full hover:bg-hover transition-colors flex items-center justify-center">
             Start Chatting Now
             <ArrowRight class="ml-2" size={18} />
           </button>
