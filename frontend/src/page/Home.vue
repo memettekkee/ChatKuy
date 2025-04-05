@@ -2,7 +2,6 @@
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import AnimationWrapper from '../molecules/AnimationWrapper.vue'
-import { motion } from 'motion-v'
 import { features, communities, steps } from '../utils/data'
 </script>
 
@@ -147,9 +146,6 @@ import { features, communities, steps } from '../utils/data'
       </div>
     </section>
     <Footer/>
-    <!-- <div class="h-[1000px]">
-
-    </div> -->
   </main>
 </template>
 

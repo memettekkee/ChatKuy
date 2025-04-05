@@ -20,6 +20,11 @@
   }
   
   /* Animasi slide dari bawah ke atas */
+  @keyframes slideInFromDownv2 {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
   @keyframes slideInFromDown {
     from { transform: translateY(80px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -55,6 +60,10 @@
   /* Kelas untuk animasi slide dari bawah */
   .slide-in-from-d-8 { 
     animation-name: slideInFromDown; 
+  }
+
+  .slide-in-from-d-v2-8 { 
+    animation-name: slideInFromDownv2; 
   }
   
   .animate-enter { animation-fill-mode: both; }

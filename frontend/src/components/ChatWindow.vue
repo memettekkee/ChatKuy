@@ -1,17 +1,13 @@
 <template>
     <div class="p-4 space-y-4">
-      <!-- Date Separator -->
-      <div class="flex justify-center">
-        <span class="px-4 py-1 bg-white text-xs font-medium text-gray-500 rounded-full shadow-sm">
-          Today
-        </span>
-      </div>
-      
       <!-- Messages -->
       <MessageBubble 
         v-for="message in messages" 
         :key="message.id" 
-        :message="message" 
+        :message="message"
+        v-animateonscroll="{ 
+          enterClass: `animate-enter slide-in-from-d-v2-8 animate-duration-500`,
+        }" 
       />
       
       <div ref="messagesEndRef"></div>

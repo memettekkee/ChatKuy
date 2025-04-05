@@ -63,9 +63,11 @@
             <button
               type="submit"
               class="w-full bg-primary text-white px-6 py-3 rounded-xl hover:bg-hover transition-colors flex items-center justify-center group"
+              :disabled="isLoading"
             >
-              Sign Up
-              <i class="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform text-xl"></i>
+                <span v-if="isLoading">Registering...</span>
+                <span v-else>Sign Up</span>
+                <i v-if="!isLoading" class="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform text-xl"></i>
             </button>
             <div class="relative my-8">
               <div class="absolute inset-0 flex items-center">
@@ -88,15 +90,37 @@
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
   import { ref } from 'vue'
+  import { registerUser } from '../utils/fetchApi'
+  import { useRouter } from 'vue-router'
+
+  const router = useRouter()
   const name = ref('')
   const email = ref('')
   const password = ref('')
+  const isLoading = ref(false)
+  const error = ref('')
   
-  const handleSubmit = () => {
-    // Handle register logic here
-    console.log('Register attempt with:', name.value, email.value, password.value)
+  const handleSubmit = async () => {
+        error.value = ''
+        isLoading.value = true
+      try {
+        const formData = {
+          name: name.value,
+          email: email.value,
+          password: password.value
+        }
+        const response = await registerUser(formData)
+        console.log('successful:', response)
+        isLoading.value = false
+        router.push('/')
+    } catch (err) {
+        console.error('Register failed:', err)
+      error.value = err instanceof Error ? err.message : 'Register failed. Please try again.'
+    } finally {
+      isLoading.value = false
+    }
   }
   
   </script>

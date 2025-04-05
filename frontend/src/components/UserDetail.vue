@@ -1,5 +1,9 @@
 <template>
-    <div class="w-80 bg-white/80 backdrop-blur-md border-l border-teal-100 flex flex-col h-full">
+    <AnimationWrapper 
+    type="slideLeft"
+    :custom-delay="index * 0.5"
+    threshold="1" 
+    class="w-80 bg-white/80 backdrop-blur-md border-l border-teal-100 flex flex-col h-full">
       <!-- Header -->
       <div class="h-16 flex items-center justify-between px-6 border-b border-teal-100">
         <h2 class="font-semibold text-gray-800">Contact info</h2>
@@ -88,10 +92,11 @@
           </button>
         </div>
       </div>
-    </div>
+    </AnimationWrapper>
   </template>
   
   <script setup>
+  import AnimationWrapper from '../molecules/AnimationWrapper.vue';
   // Define props
   const props = defineProps({
     user: {

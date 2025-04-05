@@ -39,6 +39,12 @@
                 />
               </div>
             </div>
+            
+            <!-- Error message -->
+            <div v-if="error" class="bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm">
+              {{ error }}
+            </div>
+            
             <div class="flex items-center justify-between">
               <label class="flex items-center">
                 <input
@@ -54,9 +60,11 @@
             <button
               type="submit"
               class="w-full bg-primary text-white px-6 py-3 rounded-xl hover:bg-hover transition-colors flex items-center justify-center group"
+              :disabled="isLoading"
             >
-              Sign In
-              <i class="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform text-xl"></i>
+              <span v-if="isLoading">Signing in...</span>
+              <span v-else>Sign In</span>
+              <i v-if="!isLoading" class="bx bx-right-arrow-alt ml-2 group-hover:translate-x-1 transition-transform text-xl"></i>
             </button>
             <div class="relative my-8">
               <div class="absolute inset-0 flex items-center">
@@ -81,15 +89,37 @@
     </div>
   </template>
   
-  <script setup>
+  <script setup lang="ts">
   import { ref } from 'vue'
+  import { loginUser } from '../utils/fetchApi'
+  import { useRouter } from 'vue-router'
   
+  const router = useRouter()
   const email = ref('')
   const password = ref('')
+  const isLoading = ref(false)
+  const error = ref('')
   
-  const handleSubmit = () => {
-    // Handle login logic here
-    console.log('Login attempt with:', email.value, password.value)
+  const handleSubmit = async () => {
+    error.value = ''
+    isLoading.value = true
+    
+    try {
+      const formData = {
+        email: email.value,
+        password: password.value
+      }
+      const response = await loginUser(formData)
+      console.log('Login successful:', response)
+      localStorage.setItem('token', response.token)
+      isLoading.value = false
+      router.push('/')
+      
+    } catch (err) {
+      console.error('Login failed:', err)
+      error.value = err instanceof Error ? err.message : 'Login failed. Please try again.'
+    } finally {
+      isLoading.value = false
+    }
   }
   </script>
-    
