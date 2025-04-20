@@ -144,5 +144,5 @@ export interface Message {
   }
 
   export interface TypingUsers {
-    [userId: string]: boolean;
+    [userId: string]: string;
   }

@@ -8,7 +8,7 @@ import Chat from "../page/Chat.vue";
 import Member from "../page/Member.vue";
 import NotFound from "../page/NotFound.vue";
 
-const requireAuth = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+const requireAuth = (to: RouteLocationNormalized, _from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const token = localStorage.getItem('token');
     
     if (to.meta.requiresAuth && !token) {

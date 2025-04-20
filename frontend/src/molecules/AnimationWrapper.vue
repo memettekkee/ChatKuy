@@ -17,8 +17,7 @@
 
   type AnimationType = 'slideRight' | 'slideLeft' | 'slideDown' | 'slideUp' | 'fadeIn' | 'fadeUp' | 'scaleUp';
   
-  // Props definition
-  const props = defineProps({
+  defineProps({
     type: {
       type: String as () => AnimationType,
       default: 'fadeIn'

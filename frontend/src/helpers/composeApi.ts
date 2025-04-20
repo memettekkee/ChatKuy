@@ -32,7 +32,8 @@ import type {
     GeneralResponse,
     ChatResult,
     MappedMessage,
-    MessageResult 
+    MessageResult, 
+    TypingUsers
 } from '../utils/interface';
 import { formatMessageTime } from './format';
 import { initializeSocket } from '../utils/socketService';
@@ -184,7 +185,7 @@ export function chatData() {
     const messages = ref<Message[]>([]);
     const currentChat = ref<Conversation | null>(null);
     const mappedMessages = ref<MappedMessage[]>([])
-    const typingUsers = ref<{[key: string]: string}>({});
+    const typingUsers = ref<TypingUsers>({});
 
     // Initialize Socket and listeners on mount
     onMounted(() => {

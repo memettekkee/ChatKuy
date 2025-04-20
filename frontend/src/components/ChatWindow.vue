@@ -29,12 +29,12 @@
   <script setup lang="ts">
   import { ref, onMounted, watch } from 'vue'
   import MessageBubble from '../molecules/MessageBubble.vue'
-  import type { Message, TypingUsers } from '../utils/interface'
+  import type { MappedMessage, TypingUsers } from '../utils/interface'
   
   // Define props
   const props = defineProps({
     messages: {
-      type: Array as () => Message[],
+      type: Array as () => MappedMessage[],
       required: true
     },
     typingUsers: {

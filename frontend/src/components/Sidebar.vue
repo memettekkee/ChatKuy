@@ -188,7 +188,7 @@ import { formatMessageTime } from '../helpers/format'
 import { otherUserInfo } from '../helpers/service';
 import type { Conversation } from '../utils/interface';
 
-const props = defineProps<{
+defineProps<{
   currentChatId: string | undefined;
   chats: Conversation[];
 }>();
