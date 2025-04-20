@@ -4,7 +4,7 @@ export const otherUserInfo = (user: Conversation | undefined): OtherUser => {
 
     const defaultInfo: OtherUser = {
       name: "Unknown",
-      avatar: "/public/gif/avatar.gif" 
+      avatar: "https://avatar.iran.liara.run/public" 
     };
     
     if (!user) return defaultInfo;

@@ -75,7 +75,7 @@
             >
               <div class="relative">
                 <img
-                  :src="otherUserInfo(currentChat).avatar || '/public/gif/avatar.gif'"
+                  :src="currentChat?.isGroup ? currentChat.image ? currentChat.image : 'https://avatar.iran.liara.run/public' : otherUserInfo(currentChat).avatar"
                   :alt="currentChat?.name"
                   class="w-10 h-10 rounded-2xl object-cover ring-2 ring-teal-300"
                 />

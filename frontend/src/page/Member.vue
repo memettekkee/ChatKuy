@@ -69,7 +69,7 @@
                   <div class="relative group-hover:scale-105 transition-transform duration-300">
                     <div class="absolute inset-0 bg-primary/20 rounded-full blur-sm group-hover:blur-md transition-all"></div>
                     <img
-                      :src="user.avatar || '/public/gif/avatar.gif'"
+                      :src="user.avatar || 'https://avatar.iran.liara.run/public'"
                       :alt="user.name"
                       class="w-14 h-14 rounded-full object-cover border-2 border-white relative z-10"
                     />

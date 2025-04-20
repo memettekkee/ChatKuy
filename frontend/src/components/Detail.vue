@@ -32,7 +32,7 @@
     <div class="flex flex-col items-center pt-8 pb-6 border-b border-teal-100">
       <div class="relative w-32 h-32">
         <img
-          :src="otherUserInfo(user).avatar || '/public/gif/avatar.gif'"
+          :src="user?.isGroup ? user?.image ? user?.image : 'https://avatar.iran.liara.run/public' : otherUserInfo(user).avatar"
           :alt="user?.name"
           class="w-full h-full rounded-3xl object-cover ring-4 ring-teal-100"
         />

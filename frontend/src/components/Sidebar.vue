@@ -23,13 +23,8 @@
         @click="$emit('setCurrent', chat)"
       >
         <div class="relative">
-          <img v-if="chat.isGroup"
-            :src="chat.image || '/public/gif/avatar.gif'"
-            :alt="chat.name"
-            class="w-12 h-12 rounded-2xl object-cover ring-2 ring-teal-100 group-hover:ring-teal-200 transition-all"
-          />
-          <img v-else
-            :src="otherUserInfo(chat).avatar || '/public/gif/avatar.gif'"
+          <img
+            :src="chat.isGroup ? chat.image ? chat.image : 'https://avatar.iran.liara.run/public' : otherUserInfo(chat).avatar"
             :alt="chat.name"
             class="w-12 h-12 rounded-2xl object-cover ring-2 ring-teal-100 group-hover:ring-teal-200 transition-all"
           />
