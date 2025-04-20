@@ -80,10 +80,13 @@ export const getGroupParticipants = async (conversationId: string) => {
     return participants;
 };
 
-export const getParticipantById = async (participantId: string) => {
+export const getParticipantById = async (participantId: string, conversationId: string) => {
     const participant = await prisma.participant.findUnique({
         where: {
-            id: participantId
+            userId_conversationId: {
+                userId: participantId,
+                conversationId: conversationId
+            }
         },
         include: {
             user: {
@@ -101,10 +104,13 @@ export const getParticipantById = async (participantId: string) => {
     return participant;
 };
 
-export const updateParticipantRole = async (participantId: string, role: Role) => {
+export const updateParticipantRole = async (participantId: string, conversationId: string, role: Role) => {
     const participant = await prisma.participant.update({
         where: {
-            id: participantId
+            userId_conversationId: {
+                userId: participantId,
+                conversationId: conversationId
+            }
         },
         data: {
             role
@@ -124,10 +130,13 @@ export const updateParticipantRole = async (participantId: string, role: Role) =
     return participant;
 };
 
-export const removeParticipant = async (participantId: string) => {
+export const removeParticipant = async (participantId: string, conversationId: string) => {
     await prisma.participant.delete({
         where: {
-            id: participantId
+            userId_conversationId: {
+                userId: participantId,
+                conversationId: conversationId
+            }
         }
     });
 

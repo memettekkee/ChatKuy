@@ -60,7 +60,7 @@ export const getMessageCtrl = async (
         if (!isParticipant) {
             res.status(403).json({
                 error: true,
-                message: "Anda tidak memiliki akses ke conversation ini"
+                message: "You don't have access to this conversation !"
             });
             return
         }

@@ -3,8 +3,10 @@ import type { RouteLocationNormalized, NavigationGuardNext } from "vue-router";
 import Home from "../page/Home.vue";
 import Login from "../page/Login.vue";
 import Register from '../page/Register.vue';
-import ChatLayout from "../page/ChatLayout.vue";
-// bikin satu lagi komponen klo di routenya gaaada 
+import Profile from "../page/Profile.vue";
+import Chat from "../page/Chat.vue";
+import Member from "../page/Member.vue";
+import NotFound from "../page/NotFound.vue";
 
 const requireAuth = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     const token = localStorage.getItem('token');
@@ -33,19 +35,31 @@ const routes = [
         component: Register
     },
     {
-        path: '/chat',
-        name: 'Chat',
-        component: ChatLayout,
+        path: '/profile',
+        name: 'Profile',
+        component: Profile,
+    },
+    {
+        path: '/members',
+        name: 'Member',
+        component: Member,
         meta: {
-            requiresAuth: true // Mark this route as requiring authentication
+            requiresAuth: true 
         }
     },
-    // {
-    //     // 404 route - must be the last route
-    //     path: '/:pathMatch(.*)*',
-    //     name: 'NotFound',
-    //     component: NotFound
-    //   }
+    {
+        path: '/chat',
+        name: 'Chat',
+        component: Chat,
+        meta: {
+            requiresAuth: true 
+        }
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFound
+      }
 ]
 
 const router = createRouter({

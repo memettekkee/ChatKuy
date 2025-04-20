@@ -18,7 +18,6 @@ import {
 
 const router = express.Router()
 
-
 router.post('/groups', verifyToken, upload.none(), createGroupConversationCtrl) // Bikin grup baru
 router.put('/conversations/:id', verifyToken, upload.none(), updateConversationCtrl) // edit info grup
 router.delete('/conversations/:id', verifyToken, deleteConversationCtrl) // hapus grup, hanya yg buat grup yg bisa
@@ -28,6 +27,5 @@ router.get('/conversations/:conversationId/participants', verifyToken, getPartic
 router.put('/conversations/:conversationId/participants/:participantId/role', verifyToken, upload.none(), updateParticipantRoleCtrl); // Membuat anggota lain jadi admin (hanya admin)
 router.delete('/conversations/:conversationId/participants/:participantId', verifyToken, removeParticipantCtrl); // kick anggota dari grup
 router.post('/conversations/:conversationId/leave', verifyToken, leaveConversationCtrl); // keluar dari grup
-
 
 export default router

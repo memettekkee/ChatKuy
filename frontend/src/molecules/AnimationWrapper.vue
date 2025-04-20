@@ -14,11 +14,13 @@
   
   <script setup lang="ts">
   import { motion } from 'motion-v'
+
+  type AnimationType = 'slideRight' | 'slideLeft' | 'slideDown' | 'slideUp' | 'fadeIn' | 'fadeUp' | 'scaleUp';
   
   // Props definition
   const props = defineProps({
     type: {
-      type: String,
+      type: String as () => AnimationType,
       default: 'fadeIn'
     },
     customClass: {
@@ -48,6 +50,11 @@
       animate: { y: 0, opacity: 1 },
       transition: { type: 'spring', stiffness: 100, damping: 20 }
     },
+    slideUp: {
+      initial: { y: 100, opacity: 0 },
+      animate: { y: 0, opacity: 1 },
+      transition: { type: 'spring', stiffness: 100, damping: 20 }
+    },
     fadeIn: {
       initial: { opacity: 0 },
       animate: { opacity: 1 },
@@ -63,7 +70,7 @@
       animate: { scale: 1, opacity: 1 },
       transition: { duration: 0.5 }
     },
-    // Tambahkan preset animasi lainnya sesuai kebutuhan
+    // Other animation presets...
   }
   </script>
 

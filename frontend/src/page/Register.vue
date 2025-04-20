@@ -1,5 +1,6 @@
 <template>
     <div class="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-secondary px-6">
+      <BackButton/>
       <!-- Decorative Elements -->
       <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-bl-full" />
       <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/10 rounded-tr-full" />
@@ -50,7 +51,7 @@
                 />
               </div>
             </div>
-            <div class="flex items-center">
+            <!-- <div class="flex items-center">
               <label class="flex items-center">
                 <input
                   type="checkbox"
@@ -59,6 +60,9 @@
                 />
                 <span class="ml-2 text-sm text-gray-600">I agree to the <a href="#" class="text-primary hover:underline">Terms of Service</a> and <a href="#" class="text-primary hover:underline">Privacy Policy</a></span>
               </label>
+            </div> -->
+            <div v-if="error" class="bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm mb-4">
+              {{ error }}
             </div>
             <button
               type="submit"
@@ -92,34 +96,29 @@
   
   <script setup lang="ts">
   import { ref } from 'vue'
-  import { registerUser } from '../utils/fetchApi'
   import { useRouter } from 'vue-router'
+  import { profileData } from '../helpers/composeApi'
+import BackButton from '../molecules/BackButton.vue';
 
   const router = useRouter()
+  const { isLoading, error, registerUserProfile, clearError } = profileData();
+
   const name = ref('')
   const email = ref('')
   const password = ref('')
-  const isLoading = ref(false)
-  const error = ref('')
   
   const handleSubmit = async () => {
-        error.value = ''
-        isLoading.value = true
-      try {
-        const formData = {
-          name: name.value,
-          email: email.value,
-          password: password.value
-        }
-        const response = await registerUser(formData)
-        console.log('successful:', response)
-        isLoading.value = false
-        router.push('/')
-    } catch (err) {
-        console.error('Register failed:', err)
-      error.value = err instanceof Error ? err.message : 'Register failed. Please try again.'
-    } finally {
-      isLoading.value = false
+    clearError();
+    const formData = {
+      name: name.value,
+      email: email.value,
+      password: password.value
+    };
+    const response = await registerUserProfile(formData);
+
+    if (response && !response.error) {
+      localStorage.setItem('register_success', 'true')
+      router.push('/login'); 
     }
   }
   

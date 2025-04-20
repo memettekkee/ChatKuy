@@ -1,5 +1,6 @@
 <template>
     <div class="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-white to-secondary px-6">
+      <BackButton/>
       <!-- Decorative Elements -->
       <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/5 rounded-bl-full" />
       <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-primary/10 rounded-tr-full" />
@@ -43,9 +44,8 @@
             <!-- Error message -->
             <div v-if="error" class="bg-red-100 text-red-600 px-4 py-2 rounded-lg text-sm">
               {{ error }}
-            </div>
-            
-            <div class="flex items-center justify-between">
+            </div>         
+            <!-- <div class="flex items-center justify-between">
               <label class="flex items-center">
                 <input
                   type="checkbox"
@@ -56,7 +56,7 @@
               <a href="#" class="text-sm text-primary hover:underline">
                 Forgot password?
               </a>
-            </div>
+            </div> -->
             <button
               type="submit"
               class="w-full bg-primary text-white px-6 py-3 rounded-xl hover:bg-hover transition-colors flex items-center justify-center group"
@@ -71,7 +71,6 @@
                 <div class="w-full border-t border-gray-200"></div>
               </div>
             </div>
-            <!-- Social Login Buttons -->
             
           </form>
           <!-- Sign Up Link -->
@@ -90,36 +89,37 @@
   </template>
   
   <script setup lang="ts">
-  import { ref } from 'vue'
-  import { loginUser } from '../utils/fetchApi'
+  import { ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
+  import { profileData } from '../helpers/composeApi'
+  import { useNotification } from '../helpers/notification'
+import BackButton from '../molecules/BackButton.vue'
+
+
+  onMounted(() => {
+  const registerSuccess = localStorage.getItem('register_success')
+  if (registerSuccess === 'true') {
+    useNotification().success('Account successfully registered !')
+    localStorage.removeItem('register_success')
+  }
+})
   
   const router = useRouter()
+  const { isLoading, error, loginUserProfile } = profileData();
+
   const email = ref('')
   const password = ref('')
-  const isLoading = ref(false)
-  const error = ref('')
   
   const handleSubmit = async () => {
-    error.value = ''
-    isLoading.value = true
-    
-    try {
-      const formData = {
-        email: email.value,
-        password: password.value
-      }
-      const response = await loginUser(formData)
-      console.log('Login successful:', response)
-      localStorage.setItem('token', response.token)
-      isLoading.value = false
-      router.push('/')
-      
-    } catch (err) {
-      console.error('Login failed:', err)
-      error.value = err instanceof Error ? err.message : 'Login failed. Please try again.'
-    } finally {
-      isLoading.value = false
+    const formData = {
+      email: email.value,
+      password: password.value
+    };
+    const response = await loginUserProfile(formData);
+
+    if (response) {
+      localStorage.setItem('login_success', 'true')
+      router.push('/'); 
     }
   }
   </script>

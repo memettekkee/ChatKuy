@@ -39,11 +39,12 @@ export const isGroup = async (conversationId: string) => {
             id: conversationId
         },
         select: {
-            isGroup: true
+            isGroup: true,
+            name: true
         }
     });
 
-    return conversation?.isGroup || false;
+    return conversation || { isGroup: false, name: null };
 };
 
 export const isGroupAdmin = async (userId: string, conversationId: string) => {
@@ -58,13 +59,14 @@ export const isGroupAdmin = async (userId: string, conversationId: string) => {
     return !!participant;
 };
 
-export const updateGroupConversation = async (conversationId: string, name: string) => {
+export const updateGroupConversation = async (conversationId: string, name: string, image: string) => {
     const conversation = await prisma.conversation.update({
         where: {
             id: conversationId
         },
         data: {
-            name
+            name, 
+            image
         },
         include: {
             participants: {

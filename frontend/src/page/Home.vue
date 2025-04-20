@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
-import AnimationWrapper from '../molecules/AnimationWrapper.vue'
-import { features, communities, steps } from '../utils/data'
-</script>
-
 <template>
   <main class="w-full">
     <Navbar/>
@@ -22,14 +15,14 @@ import { features, communities, steps } from '../utils/data'
             Start Chatting Now
             <ArrowRight class="ml-2" size={18} />
           </button>
-          <button class="bg-white border-2 border-primary text-primary px-8 py-3 rounded-full hover:bg-secondary transition-colors">
+          <a href="#features" class="bg-white border-2 border-primary text-primary px-8 py-3 rounded-full hover:bg-secondary transition-colors">
             Discover Features
-          </button>
+          </a>
         </div>
       </div>
       <AnimationWrapper 
         type="slideLeft"
-        :custom-delay="index * 0.5"
+        :custom-delay="0.5"
         threshold="1" 
         customClass="md:px-16"
       >
@@ -99,9 +92,6 @@ import { features, communities, steps } from '../utils/data'
               <p class="text-sm text-gray-600">
                 {{ community.members.toLocaleString() }} members
               </p>
-              <button class="mt-3 w-full bg-secondary text-primary px-4 py-2 rounded-full hover:bg-hover hover:text-secondary transition-colors text-sm font-medium">
-                Join Community
-              </button>
             </div>
           </div>
         </div>
@@ -148,4 +138,24 @@ import { features, communities, steps } from '../utils/data'
     <Footer/>
   </main>
 </template>
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import Navbar from '../components/Navbar.vue'
+import Footer from '../components/Footer.vue'
+import AnimationWrapper from '../molecules/AnimationWrapper.vue'
+import { features, communities, steps } from '../utils/data'
+import { useNotification } from '../helpers/notification'
+
+
+onMounted(() => {
+  const loginSuccess = localStorage.getItem('login_success')
+  if (loginSuccess === 'true') {
+    useNotification().success('Login successfully !')
+    localStorage.removeItem('login_success')
+  }
+})
+
+</script>
+
 

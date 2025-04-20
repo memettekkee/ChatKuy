@@ -34,31 +34,6 @@
               </a>
             </div>
           </div>
-          <div>
-            <h3 class="text-lg font-semibold mb-4">Product</h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="#" class="text-gray-600 hover:text-primary">
-                  Features
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-primary">
-                  Communities
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-primary">
-                  Mobile App
-                </a>
-              </li>
-              <li>
-                <a href="#" class="text-gray-600 hover:text-primary">
-                  Pricing
-                </a>
-              </li>
-            </ul>
-          </div>
           
         </div>
         <div class="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">

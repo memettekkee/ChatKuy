@@ -151,7 +151,7 @@ export const updateParticipantRoleCtrl = async (
             return
         }
 
-        const participant = await getParticipantById(participantId);
+        const participant = await getParticipantById(participantId, conversationId);
         if (!participant || participant.conversationId !== conversationId) {
             res.status(404).json({
                 error: true,
@@ -160,7 +160,7 @@ export const updateParticipantRoleCtrl = async (
             return
         }
 
-        const updatedParticipant = await updateParticipantRole(participantId, role as 'ADMIN' | 'MEMBER');
+        const updatedParticipant = await updateParticipantRole(participantId, conversationId, role as 'ADMIN' | 'MEMBER');
 
         res.status(200).json({
             error: false,
@@ -169,6 +169,7 @@ export const updateParticipantRoleCtrl = async (
         });
         return
     } catch (e: any) {
+        console.log(e.message)
         res.status(500).json({
             error: true,
             message: e.message || "Server error"
@@ -203,7 +204,7 @@ export const removeParticipantCtrl = async (
             return
         }
 
-        const participant = await getParticipantById(participantId);
+        const participant = await getParticipantById(participantId, conversationId);
         if (!participant || participant.conversationId !== conversationId) {
             res.status(404).json({
                 error: true,
@@ -225,7 +226,7 @@ export const removeParticipantCtrl = async (
             }
         }
 
-        await removeParticipant(participantId);
+        await removeParticipant(participantId, conversationId);
 
         res.status(200).json({
             error: false,

@@ -14,6 +14,11 @@ export const existingUser = async (email: string) => {
     return user
 }
 
+export const allUser = async () => {
+    const user = await prisma.user.findMany()
+    return user
+}
+
 export const userById = async (userId: string) => {
     const user = await prisma.user.findUnique({
         where: {id: userId}
@@ -21,12 +26,13 @@ export const userById = async (userId: string) => {
     return user
 }
 
-export const updateUser = async (userId: string, name: string, email: string) => {
+export const updateUser = async (userId: string, name: string, email: string, avatar: string) => {
     const user = await prisma.user.update({
         where: {id: userId},
         data: {
             name: name,
-            email: email
+            email: email,
+            avatar: avatar
         }
     })
     return user

@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Tambahkan kelas Tailwind untuk animasi */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -13,13 +24,16 @@
     to { transform: translateX(0); opacity: 1; }
   }
 
-  /* Animasi slide dari atas ke bawah */
+  @keyframes slideInFromRight {
+    from { transform: translateX(80px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
   @keyframes slideInFromUp {
     from { transform: translateY(-80px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
   }
   
-  /* Animasi slide dari bawah ke atas */
   @keyframes slideInFromDownv2 {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -30,34 +44,28 @@
     to { transform: translateY(0); opacity: 1; }
   }
 
-  /* Animasi zoom out dari besar ke normal */
 @keyframes zoomOut {
     from { transform: scale(1.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
   
-  /* Animasi zoom in dari kecil ke normal */
   @keyframes zoomIn {
     from { transform: scale(0.5); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
   
-  /* Kelas untuk animasi zoom out */
   .zoom-out-50 { 
     animation-name: zoomOut; 
   }
   
-  /* Kelas untuk animasi zoom in */
   .zoom-in-50 { 
     animation-name: zoomIn; 
   }  
   
-  /* Kelas untuk animasi slide dari atas */
   .slide-in-from-u-8 { 
     animation-name: slideInFromUp; 
   }
   
-  /* Kelas untuk animasi slide dari bawah */
   .slide-in-from-d-8 { 
     animation-name: slideInFromDown; 
   }
@@ -69,11 +77,30 @@
   .animate-enter { animation-fill-mode: both; }
   .fade-in-10 { animation-name: fadeIn; }
   .slide-in-from-l-8 { animation-name: slideInFromLeft; }
+  .slide-in-from-r-8 { animation-name: slideInFromRight; }
   .animate-duration-500 { animation-duration: 0.5s; }
   .animate-duration-1000 { animation-duration: 1s; }
   .animate-duration-1500 { animation-duration: 1.5s; }
   .animate-duration-2000 { animation-duration: 2s; }
-  
-  /* Untuk leave animation */
   .animate-leave { animation-fill-mode: both; animation-direction: reverse; }
   .fade-out-0 { animation-name: fadeIn; }
+
+  /* Ensure the message bubble has correct positioning for the tail */
+.rounded-bl-none {
+  border-bottom-left-radius: 0;
+}
+
+.cursor-pointer:hover {
+  background-color: #f8f8f8;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+button:hover {
+  animation: pulse 1.5s infinite;
+}

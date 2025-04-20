@@ -47,7 +47,7 @@ export const updateConversationCtrl = async (
 ) => {
     try {
         const { id } = req.params;
-        const { name } = req.body;
+        const { name, image } = req.body;
         const userId = req.user?.id;
         
         const groupCheck = await isGroup(id);
@@ -76,7 +76,7 @@ export const updateConversationCtrl = async (
             return
         }
 
-        const conversation = await updateGroupConversation(id, name);
+        const conversation = await updateGroupConversation(id, name, image);
 
         res.status(200).json({
             error: false,

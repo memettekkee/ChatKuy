@@ -12,7 +12,6 @@ export const isUserInConversation = async (userId: string, conversationId: strin
 };
 
 export const createMessage = async (conversationId: string, userId: string, content: string) => {
-    // Update conversation updatedAt agar bisa sort conversations berdasarkan pesan terbaru
     await prisma.conversation.update({
         where: {
             id: conversationId

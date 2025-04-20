@@ -2,7 +2,7 @@ import express from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-import { existingUser, registerUser, userById, updateUser } from '../model/userModel'
+import { existingUser, registerUser, userById, updateUser, allUser } from '../model/userModel'
 
 export const registerCtrl = async (
     req: express.Request,
@@ -97,6 +97,28 @@ export const loginCtrl = async (
     }
 }
 
+export const getAllUser = async (
+    req: express.Request,
+    res: express.Response
+) => {
+    try {
+        const allUsers = await allUser()
+        
+        res.status(200).json({
+            error: false,
+            message: "Successfully get list of users !",
+            userList: allUsers
+        })
+        return
+    } catch (e: any) {
+        res.status(500).json({
+            error: true,
+            message: e.message
+        })
+        return
+    }
+}
+
 export const getUserByIdCtrl = async (
     req: express.Request,
     res: express.Response
@@ -134,7 +156,7 @@ export const updateUserCtrl = async (
     res: express.Response
 ) => {
     try {
-        const { name, email } = req.body
+        const { name, email, avatar } = req.body
         const userId = req.user?.id;
     
         const checkUser = await userById(userId as string)
@@ -147,7 +169,7 @@ export const updateUserCtrl = async (
             return;
         }
 
-        const updatedData = await updateUser(userId as string, name, email)
+        const updatedData = await updateUser(userId as string, name, email, avatar)
 
         res.status(200).json({
             error: false,
