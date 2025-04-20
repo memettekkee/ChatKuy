@@ -33,7 +33,7 @@
             </a>
             <Menu as="div" class="relative">
               <MenuButton class="hover:text-primary transition-colors flex items-center gap-2">
-                <img class="w-5 h-5 rounded-full border border-black hover:border-primary transition-colors" :src="user.avatar || '/public/image/second-logo.png'"/>
+                <img class="w-5 h-5 rounded-full border border-black hover:border-primary transition-colors" :src="user.avatar || 'https://avatar.iran.liara.run/public'"/>
                 {{ user.name }}
               </MenuButton>
               <transition
@@ -146,7 +146,7 @@
               </a>
                 <Menu as="div" class="relative">
                   <MenuButton class="hover:text-primary transition-colors flex items-center gap-2">
-                    <img class="w-5 h-5 rounded-full border border-black hover:border-primary transition-colors" :src="user.avatar || '/public/image/second-logo.png'"/>
+                    <img class="w-5 h-5 rounded-full border border-black hover:border-primary transition-colors" :src="user.avatar || 'https://avatar.iran.liara.run/public'"/>
                     {{ user.name }}
                   </MenuButton>
                   <transition
